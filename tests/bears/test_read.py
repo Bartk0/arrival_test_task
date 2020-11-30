@@ -8,7 +8,7 @@ from helpers.test_data import random_string
 
 
 @allure.testcase('Read by id', name="Test of reading info about specific bear")
-@allure.description("Create, read and delete")
+@allure.description("Create and read bear by id")
 def test_read_by_id(bears):
     with allure.step('create bear'):
         create_result = bears.create()
@@ -26,7 +26,7 @@ def test_read_by_id(bears):
         assert_that(read_result.text, equal_to("EMPTY"))
 
 
-@allure.testcase('Read all', name="Test of reading all bears")
+@allure.testcase('Read all', name="Test of reading all the bears")
 @allure.description("Create, read and delete")
 def test_read_all(bears):
     with allure.step('create bears'):

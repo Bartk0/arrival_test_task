@@ -3,7 +3,7 @@ import allure
 from helpers.bears import BearTypes
 
 
-@allure.testcase('Update Test', name="Test of updating bear")
+@allure.testcase('Update', name="Test of bear updating")
 @allure.description("Create, update and delete")
 def test_update(bears):
     with allure.step('create bear'):
