@@ -1,5 +1,6 @@
 import allure
 import pytest
+from hamcrest import assert_that, is_not
 
 from helpers.test_data import bears_generator
 
@@ -19,13 +20,14 @@ def test_create(bears, bear_name, bear_type, bear_age):
         bear_id = create_result.text
 
     with allure.step('read bear info with id'):
-        read_result = bears.read(bear_id)
-        bears.assert_bear_data(read_result.json(), bear_id, bear_name, bear_type, bear_age)
+        read_result = bears.read(bear_id).json()
+        assert_that(read_result, is_not(None))
+        bears.assert_bear_data(read_result, bear_id, bear_name, bear_type, bear_age)
 
     with allure.step('read all bears'):
         read_result = bears.read_all()
         result_data = read_result.json()
+        assert_that(read_result, is_not(None))
         for bear in result_data:
             if bear["bear_id"] == int(bear_id):
                 bears.assert_bear_data(bear, bear_id, bear_name, bear_type, bear_age)
-
