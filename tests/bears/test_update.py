@@ -12,7 +12,7 @@ def test_update(bears):
 
     with allure.step('read bear info with id'):
         read_result = bears.read(bear_id)
-        bears.assert_bear_data(read_result.json())
+        bears.assert_bear_data(read_result.json(), bear_id)
 
     with allure.step('update bear'):
         new_name = "Broken teeth"
