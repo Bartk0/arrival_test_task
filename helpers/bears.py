@@ -22,10 +22,10 @@ class BearHelper:
         assert_that(res.status_code, equal_to(200))
 
     def delete(self, bear_id):
-        res = requests.delete("/:".join([self.path, bear_id]))
+        res = requests.delete("/".join([self.path, bear_id]))
         assert_that(res.status_code, equal_to(200))
 
-    def create(self, bear_name="Misha", bear_type=BearTypes.GUMMY, bear_age=18.99):
+    def create(self, bear_name="Misha", bear_type=BearTypes.POLAR, bear_age=18.99):
         body = json.dumps({
             "bear_type": bear_type,
             "bear_name": bear_name,
@@ -43,7 +43,7 @@ class BearHelper:
         return res
 
     def read(self, bear_id):
-        res = requests.get("/:".join([self.path, bear_id]))
+        res = requests.get("/".join([self.path, bear_id]))
         assert_that(res.status_code, equal_to(200))
         assert_that(res.headers.get("Content-type"), equal_to("text/html;charset=utf-8"))
         return res
@@ -54,7 +54,7 @@ class BearHelper:
             "bear_name": bear_name,
             "bear_age": bear_age
         })
-        res = requests.put(":".join([self.path, bear_id]), data=body)
+        res = requests.put("/".join([self.path, bear_id]), data=body)
         assert_that(res.status_code, equal_to(200))
         return res
 
@@ -65,9 +65,9 @@ class BearHelper:
         return res
 
     @staticmethod
-    def assert_bear_data(bear_obj, ref_bear_id, ref_bear_name="Misha", ref_bear_type=BearTypes.GUMMY,
+    def assert_bear_data(bear_obj, ref_bear_id, ref_bear_name="Misha", ref_bear_type=BearTypes.POLAR,
                          ref_bear_age=18.99):
-        assert_that(bear_obj["bear_id"], equal_to(ref_bear_id))
+        assert_that(bear_obj["bear_id"], equal_to(int(ref_bear_id)))
         assert_that(bear_obj["bear_name"], equal_to(ref_bear_name))
         assert_that(bear_obj["bear_type"], equal_to(ref_bear_type))
         assert_that(bear_obj["bear_age"], equal_to(ref_bear_age))

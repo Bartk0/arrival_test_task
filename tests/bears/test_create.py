@@ -20,7 +20,7 @@ def test_create(bears, bear_name, bear_type, bear_age):
 
     with allure.step('read bear info with id'):
         read_result = bears.read(bear_id)
-        bears.assert_bear_data(read_result.json(), bear_name, bear_type, bear_age)
+        bears.assert_bear_data(read_result.json(), bear_id, bear_name, bear_type, bear_age)
 
     with allure.step('read all bears'):
         read_result = bears.read_all()
